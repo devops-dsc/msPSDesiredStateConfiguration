@@ -55,7 +55,8 @@ function Get-TargetResource
 
     @{
         EndpointName      = $EndpointName
-        CertificateThumbPrint = if($CertificateThumbPrint -eq 'AllowUnencryptedTraffic'){$CertificateThumbPrint} else {Get-WebBinding -Name $EndpointName}
+        #CertificateThumbPrint = if($CertificateThumbPrint -eq 'AllowUnencryptedTraffic'){$CertificateThumbPrint} else {Get-WebBinding -Name $EndpointName}
+        CertificateThumbPrint = $CertificateThumbPrint
         Port              = $iisPort
         PhysicalPath      = $website.physicalPath
         State             = $webSite.state
