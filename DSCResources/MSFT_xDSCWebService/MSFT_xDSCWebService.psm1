@@ -159,8 +159,9 @@ function Set-TargetResource
     Update-LocationTagInApplicationHostConfigForAuthentication -WebSite $EndpointName -Authentication "windows"
         
 ### Hacking for 2012
-$IsBlue = $false
+#$IsBlue = $false
 ### End Hack
+
     if ($IsBlue)
     {
         Write-Verbose "Set values into the web.config that define the repository for BLUE OS"
@@ -194,11 +195,15 @@ $IsBlue = $false
         # configuration and modules files are stored. Also copy an empty database
         # into place.  
         
-### Hacking for 2012      
-        # PSWSIISEndpoint\Set-AppSettingsInWebconfig -path $PhysicalPath -key "dbprovider" -value $eseprovider
-        #PSWSIISEndpoint\Set-AppSettingsInWebconfig -path $PhysicalPath -key "dbconnectionstr" -value $esedatabase
+### Hacking for 2012 Adding OS version check to selecting db versions
+        if((Get-WmiObject -class Win32_OperatingSystem).Version -gt "6.3") {      
+        PSWSIISEndpoint\Set-AppSettingsInWebconfig -path $PhysicalPath -key "dbprovider" -value $eseprovider
+        PSWSIISEndpoint\Set-AppSettingsInWebconfig -path $PhysicalPath -key "dbconnectionstr" -value $esedatabase
+        }
+        else {
         Set-AppSettingsInWebconfig -path $PhysicalPath -key "dbprovider" -value $jet4provider
         Set-AppSettingsInWebconfig -path $PhysicalPath -key "dbconnectionstr" -value $jet4database
+        }
 ### End Hack
 
         $repository = Join-Path $rootDataPath "Devices.mdb"
