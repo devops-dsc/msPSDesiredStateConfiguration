@@ -158,7 +158,9 @@ function Set-TargetResource
     Update-LocationTagInApplicationHostConfigForAuthentication -WebSite $EndpointName -Authentication "basic"
     Update-LocationTagInApplicationHostConfigForAuthentication -WebSite $EndpointName -Authentication "windows"
         
-
+### Hacking for 2012
+$IsBlue = $false
+### End Hack
     if ($IsBlue)
     {
         Write-Verbose "Set values into the web.config that define the repository for BLUE OS"
