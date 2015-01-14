@@ -1,4 +1,4 @@
-﻿ipmo xDSCResourceDesigner
+ipmo msDSCResourceDesigner
 
 $resProperties = @{
     Name          = New-xDscResourceProperty -Description 'Name of the PS Remoting Endpoint' `
@@ -15,4 +15,4 @@ $resProperties = @{
                                              -Name AccessMode -Type String -Attribute Write -ValidateSet 'Local','Remote', 'Disabled'
 }
 
-New-xDscResource -Name MSFT_xPSSessionConfiguration -Property $resProperties.Values -Path $home\desktop -ModuleName xPSDesiredStateConfiguration -FriendlyName xPSEndpoint -Force
+New-xDscResource -Name MSFT_msPSSessionConfiguration -Property $resProperties.Values -Path $home\desktop -ModuleName msPSDesiredStateConfiguration -FriendlyName msPSEndpoint -Force
